@@ -97,7 +97,7 @@ export class MediaController {
     const username = req.user.userName;
     this.logger.debug(
       `Recieved filename '${file.originalname}' for note '${noteId}' from user '${username}'`,
-      'uploadImage',
+      'uploadMedia',
     );
     try {
       const url = await this.mediaService.saveFile(
@@ -134,7 +134,7 @@ export class MediaController {
     try {
       this.logger.debug(
         `Deleting '${filename}' for user '${username}'`,
-        'deleteFile',
+        'deleteMedia',
       );
       const mediaUpload = await this.mediaService.findUploadByFilename(
         filename,
@@ -142,7 +142,7 @@ export class MediaController {
       if (mediaUpload.user.userName !== username) {
         this.logger.warn(
           `${username} tried to delete '${filename}', but is not the owner`,
-          'deleteFile',
+          'deleteMedia',
         );
         throw new PermissionError(
           `File '${filename}' is not owned by '${username}'`,
